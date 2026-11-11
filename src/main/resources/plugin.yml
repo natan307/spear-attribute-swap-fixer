@@ -1,0 +1,14 @@
+name: SpearAttributeSwapFixer
+version: '2.1.0'
+main: id.ezra.spearswap.SpearSwapFixerPlugin
+api-version: '1.21.11'
+description: "Spear Attribute Swap Fixer - zero cooldown spear after a hotbar swipe"
+commands:
+  spearswapfixer:
+    description: Toggle the spear swipe fixer on/off
+    aliases: [ssf, spearswarpfixer]
+    permission: spearswapfixer.use
+permissions:
+  spearswapfixer.use:
+    description: Allows toggling Spear Attribute Swap Fixer
+    default: op

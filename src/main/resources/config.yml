@@ -1,0 +1,18 @@
+# Spear Attribute Swap Fixer​‌‌​​​‌​​‌‌‌‌​​‌​​‌​​​​​​‌‌​​‌​‌​‌‌‌‌​‌​​‌‌‌​​‌​​‌‌​​​​‌​​‌​‌‌‌‌​‌‌​‌‌‌​​‌‌​​​​‌​‌‌‌​‌​​​‌‌​​​​‌​‌‌​‌‌‌​
+# Swipe hotbar to a spear -> zero attack cooldown. No swipe -> vanilla cooldown.
+
+enabled: true
+
+# How long (ticks, 20 = 1s) the zero-cooldown state lasts after a swipe. Every attack inside
+# this window is free (spam lunge/jab). Use 0 to keep it until the player swipes away.
+zero-cooldown-ticks: 60
+
+# Temporary attack-speed bonus sent to the client so the spear jab/lunge is never on cooldown.
+# Needs to be large (the game caps attack speed at 1024). Do not set to 0.
+attack-speed-boost: 1000
+
+# Also trigger when swapping with the offhand key
+hand-swap-triggers: false
+
+# Only spears with the Lunge enchantment count
+lunge-only: false
