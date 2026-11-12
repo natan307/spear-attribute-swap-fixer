@@ -1,6 +1,5 @@
 package id.ezra.spearswap;
 
-import com.destroystokyo.paper.event.player.PlayerAttackEntityCooldownResetEvent;
 import io.papermc.paper.event.player.PrePlayerAttackEntityEvent;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -59,11 +58,11 @@ final class SpearEvents implements Listener {
         }
     }
 
-    // ---- while active: attacks are never on cooldown ----
+    // ---- one free attack per swipe ----
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void swing(PlayerAnimationEvent e) {
-        topUp(e.getPlayer());
+        consume(e.getPlayer());
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -71,16 +70,17 @@ final class SpearEvents implements Listener {
         topUp(e.getPlayer());
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void noReset(PlayerAttackEntityCooldownResetEvent e) {
-        Player p = e.getPlayer();
-        if (plugin.isOn() && tracker.isActive(p.getUniqueId())) e.setCancelled(true);
-    }
-
     @EventHandler
     public void quit(PlayerQuitEvent e) {
         tracker.disarm(e.getPlayer().getUniqueId());
         boost.forget(e.getPlayer().getUniqueId());
+    }
+
+    /** First jab after a swipe is free; after that the normal cooldown is back until the next swipe. */
+    private void consume(Player p) {
+        if (!plugin.isOn() || !tracker.isActive(p.getUniqueId())) return;
+        ticker.fill(p);                      // this attack/lunge is free
+        tracker.disarm(p.getUniqueId());     // the boost is removed by the plugin's next tick
     }
 
     private void topUp(Player p) {

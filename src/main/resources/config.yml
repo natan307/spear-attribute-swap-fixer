@@ -3,9 +3,9 @@
 
 enabled: true
 
-# How long (ticks, 20 = 1s) the zero-cooldown state lasts after a swipe. Every attack inside
-# this window is free (spam lunge/jab). Use 0 to keep it until the player swipes away.
-zero-cooldown-ticks: 60
+# Each swipe to a spear gives ONE free jab/lunge. This is how long (ticks, 20 = 1s) the free jab stays
+# available after the swipe if it is not used. 0 = until used or the player swipes away.
+zero-cooldown-ticks: 40
 
 # Temporary attack-speed bonus sent to the client so the spear jab/lunge is never on cooldown.
 # Needs to be large (the game caps attack speed at 1024). Do not set to 0.
