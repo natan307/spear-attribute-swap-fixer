@@ -1,12 +1,14 @@
 # Spear Attribute Swap Fixer
 
-A server-side Paper plugin. Swipe your hotbar to a spear and the spear's jab attack, including the Lunge dash, has no attack cooldown for a short, configurable window. If you do not swipe, the normal vanilla cooldown applies.
+A server-side Paper plugin. Every time you swipe your hotbar to a spear, you get **one** spear jab with no attack cooldown, so the Lunge dash is instantly available. After that jab, the normal vanilla cooldown applies until your next swipe. Without a swipe, nothing changes.
 
 ## How it works
 
-- Swiping the hotbar to a spear starts a zero-cooldown window.
-- During the window, a temporary attack speed modifier is applied to the player. The spear cooldown check runs on the client using the attack speed attribute, so the modifier is what makes the jab available. The server-side attack cooldown counter is also kept full.
-- The modifier is removed when the window ends, when the player swipes to a non-spear item, when they leave, or when the plugin is disabled.
+1. Swiping the hotbar to a spear arms one free jab.
+2. A temporary attack speed modifier is applied to the player. The spear cooldown check runs on the client using the attack speed attribute, so the modifier is what makes the jab (and the Lunge dash on it) available. The server-side attack cooldown counter is also filled for that attack.
+3. As soon as the jab is used, the modifier is removed and the normal cooldown takes over.
+4. If the free jab is not used, it expires after a configurable time (default 2 seconds), or when the player swipes to a non-spear item, leaves the server, or the plugin is disabled.
+5. Swiping to a spear again arms another free jab.
 
 ## Vanilla Lunge rules still apply
 
@@ -37,8 +39,8 @@ The plugin only removes the cooldown, so Lunge is still blocked by:
 
 ```yaml
 enabled: true
+zero-cooldown-ticks: 40       # how long the free jab stays available after a swipe (20 ticks = 1 second); 0 = until used or the player swipes away
 attack-speed-boost: 1000      # temporary attack speed bonus; must be large, do not set to 0
-zero-cooldown-ticks: 60       # window after a swipe (20 ticks = 1 second); 0 = until the player swipes away
 hand-swap-triggers: false     # also trigger with the offhand swap key
 lunge-only: false             # only count spears that have the Lunge enchantment
 ```
@@ -49,7 +51,7 @@ Requires Java 21 and Maven.
 
 ```sh
 mvn clean package
-# output: target/SpearAttributeSwapFixer-2.1.0.jar
+# output: target/SpearAttributeSwapFixer-2.2.0.jar
 ```
 
 ## Credits
