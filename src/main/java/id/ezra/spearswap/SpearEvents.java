@@ -1,6 +1,5 @@
 package id.ezra.spearswap;
 
-import io.papermc.paper.event.player.PrePlayerAttackEntityEvent;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -9,6 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
@@ -65,9 +65,10 @@ final class SpearEvents implements Listener {
         consume(e.getPlayer());
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void preAttack(PrePlayerAttackEntityEvent e) {
-        topUp(e.getPlayer());
+    // A persistent modifier could survive a crash on Spigot, so always start clean.
+    @EventHandler
+    public void join(PlayerJoinEvent e) {
+        boost.clear(e.getPlayer());
     }
 
     @EventHandler
@@ -81,10 +82,6 @@ final class SpearEvents implements Listener {
         if (!plugin.isOn() || !tracker.isActive(p.getUniqueId())) return;
         ticker.fill(p);                      // this attack/lunge is free
         tracker.disarm(p.getUniqueId());     // the boost is removed by the plugin's next tick
-    }
-
-    private void topUp(Player p) {
-        if (plugin.isOn() && tracker.isActive(p.getUniqueId())) ticker.fill(p);
     }
 
     private boolean counts(ItemStack item) {

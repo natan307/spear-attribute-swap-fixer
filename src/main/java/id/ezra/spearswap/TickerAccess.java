@@ -43,9 +43,9 @@ final class TickerAccess {
                     }
                 }
             }
-            log.warning("attackStrengthTicker not found; zero-cooldown disabled");
+            log.info("Server-side cooldown counter not accessible on this server (normal on Spigot); using the attack speed modifier only.");
         } catch (Exception e) {
-            log.warning("Reflection failed: " + e.getMessage());
+            log.info("Cooldown counter reflection unavailable (" + e.getMessage() + "); using the attack speed modifier only.");
         }
         broken = true;
         return false;

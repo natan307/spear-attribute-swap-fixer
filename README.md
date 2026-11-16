@@ -1,11 +1,11 @@
 # Spear Attribute Swap Fixer
 
-A server-side Paper plugin. Every time you swipe your hotbar to a spear, you get **one** spear jab with no attack cooldown, so the Lunge dash is instantly available. After that jab, the normal vanilla cooldown applies until your next swipe. Without a swipe, nothing changes.
+A server-side plugin for **Spigot, Bukkit and Paper** (1.21.11 to 26.3). Every time you swipe your hotbar to a spear, you get **one** spear jab with no attack cooldown, so the Lunge dash is instantly available. After that jab, the normal vanilla cooldown applies until your next swipe. Without a swipe, nothing changes.
 
 ## How it works
 
 1. Swiping the hotbar to a spear arms one free jab.
-2. A temporary attack speed modifier is applied to the player. The spear cooldown check runs on the client using the attack speed attribute, so the modifier is what makes the jab (and the Lunge dash on it) available. The server-side attack cooldown counter is also filled for that attack.
+2. A temporary attack speed modifier is applied to the player. The spear cooldown check runs on the client using the attack speed attribute, so the modifier is what makes the jab (and the Lunge dash on it) available. Where the server allows it, the server-side attack cooldown counter is also filled for that attack.
 3. As soon as the jab is used, the modifier is removed and the normal cooldown takes over.
 4. If the free jab is not used, it expires after a configurable time (default 2 seconds), or when the player swipes to a non-spear item, leaves the server, or the plugin is disabled.
 5. Swiping to a spear again arms another free jab.
@@ -19,9 +19,9 @@ The plugin only removes the cooldown, so Lunge is still blocked by:
 
 ## Compatibility
 
-- Paper (and forks such as Purpur) 1.21.11 to 26.3
+- Spigot, Bukkit, Paper and forks (Purpur etc.) 1.21.11 to 26.3
 - Java 21
-- Not for Spigot or Bukkit. Not tested on Folia.
+- Not for Folia (the plugin disables itself there)
 
 ## Installation
 
@@ -51,7 +51,7 @@ Requires Java 21 and Maven.
 
 ```sh
 mvn clean package
-# output: target/SpearAttributeSwapFixer-2.2.0.jar
+# output: target/SpearAttributeSwapFixer-2.3.0.jar
 ```
 
 ## Credits

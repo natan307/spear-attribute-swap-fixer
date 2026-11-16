@@ -18,12 +18,20 @@ public class SpearSwapFixerPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        if (isFolia()) {
+            getLogger().severe("Folia is not supported. Disabling.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
         saveDefaultConfig();
         enabledFlag = getConfig().getBoolean("enabled", true);
         ticker = new TickerAccess(getLogger());
         boost = new AttackSpeedBoost(this);
 
         getServer().getPluginManager().registerEvents(new SpearEvents(this, tracker, ticker, boost), this);
+
+        // clean up leftovers (e.g. after a crash) for players already online
+        for (Player p : Bukkit.getOnlinePlayers()) boost.clear(p);
 
         // every tick: advance the clock and keep everyone in the zero-cooldown state topped up
         Bukkit.getScheduler().runTaskTimer(this, () -> {
@@ -53,7 +61,17 @@ public class SpearSwapFixerPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         tracker.clear();
+        if (boost == null) return;
         for (Player p : Bukkit.getOnlinePlayers()) boost.clear(p);
+    }
+
+    private static boolean isFolia() {
+        try {
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
     }
 
     @Override
