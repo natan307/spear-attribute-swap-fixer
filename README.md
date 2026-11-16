@@ -58,10 +58,6 @@ mvn clean package
 
 Inspired by Paper Attribute Swap Fixer by SalmonBlock.
 
-## AI disclosure
-
-Parts of this project were written with the help of AI (Claude).
-
 ## License
 
 [LGPL-3.0-only](LICENSE)
