@@ -1,4 +1,4 @@
-# Spear Attribute Swap Fixer​‌‌​​​‌​​‌‌‌‌​​‌​​‌​​​​​​‌‌​​‌​‌​‌‌‌‌​‌​​‌‌‌​​‌​​‌‌​​​​‌​​‌​‌‌‌‌​‌‌​‌‌‌​​‌‌​​​​‌​‌‌‌​‌​​​‌‌​​​​‌​‌‌​‌‌‌​
+# SpearAttributeSwapFixer​‌‌​​​‌​​‌‌‌‌​​‌​​‌​​​​​​‌‌​​‌​‌​‌‌‌‌​‌​​‌‌‌​​‌​​‌‌​​​​‌​​‌​‌‌‌‌​‌‌​‌‌‌​​‌‌​​​​‌​‌‌‌​‌​​​‌‌​​​​‌​‌‌​‌‌‌​
 # Swipe hotbar to a spear -> zero attack cooldown. No swipe -> vanilla cooldown.
 
 enabled: true
@@ -16,3 +16,6 @@ hand-swap-triggers: false
 
 # Only spears with the Lunge enchantment count
 lunge-only: false
+
+# Anonymous usage statistics via bStats (https://bstats.org). Set to false to disable.
+metrics: true

@@ -1,5 +1,6 @@
 package id.ezra.spearswap;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -25,6 +26,11 @@ public class SpearSwapFixerPlugin extends JavaPlugin {
         }
         saveDefaultConfig();
         enabledFlag = getConfig().getBoolean("enabled", true);
+
+        // anonymous usage statistics (bStats); can be disabled here or globally in plugins/bStats/config.yml
+        if (getConfig().getBoolean("metrics", true)) {
+            new Metrics(this, 35408);
+        }
         ticker = new TickerAccess(getLogger());
         boost = new AttackSpeedBoost(this);
 
@@ -55,7 +61,7 @@ public class SpearSwapFixerPlugin extends JavaPlugin {
             }
         }, 1L, 1L);
 
-        getLogger().info("Spear Attribute Swap Fixer " + (enabledFlag ? "ON" : "OFF"));
+        getLogger().info("SpearAttributeSwapFixer " + (enabledFlag ? "ON" : "OFF"));
     }
 
     @Override
@@ -84,7 +90,7 @@ public class SpearSwapFixerPlugin extends JavaPlugin {
         if (!enabledFlag) tracker.clear();
         getConfig().set("enabled", enabledFlag);
         saveConfig();
-        sender.sendMessage("§b[SpearSwap] §fZero-cooldown swipe: "
+        sender.sendMessage("§b[SpearAttributeSwapFixer] §fZero-cooldown swipe: "
                 + (enabledFlag ? "§aON" : "§cOFF"));
         return true;
     }

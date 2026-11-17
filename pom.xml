@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>id.ezra</groupId>
-    <artifactId>spear-attribute-swap-fixer</artifactId>
-    <version>2.3.0</version>
+    <artifactId>SpearAttributeSwapFixer</artifactId>
+    <version>2.3.1</version>
     <packaging>jar</packaging>
 
-    <name>Spear Attribute Swap Fixer</name>
+    <name>SpearAttributeSwapFixer</name>
 
     <properties>
         <java.version>21</java.version>
@@ -34,10 +34,16 @@
             <version>1.21.11-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.2.1</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
-        <finalName>SpearAttributeSwapFixer-2.3.0</finalName>
+        <finalName>SpearAttributeSwapFixer-2.3.1</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -58,6 +64,28 @@
                         </manifestEntries>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <createDependencyReducedPom>false</createDependencyReducedPom>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>id.ezra.spearswap.libs.bstats</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

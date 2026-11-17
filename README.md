@@ -1,4 +1,4 @@
-# Spear Attribute Swap Fixer
+# SpearAttributeSwapFixer
 
 A server-side plugin for **Spigot, Bukkit and Paper** (1.21.11 to 26.3). Every time you swipe your hotbar to a spear, you get **one** spear jab with no attack cooldown, so the Lunge dash is instantly available. After that jab, the normal vanilla cooldown applies until your next swipe. Without a swipe, nothing changes.
 
@@ -43,6 +43,7 @@ zero-cooldown-ticks: 40       # how long the free jab stays available after a sw
 attack-speed-boost: 1000      # temporary attack speed bonus; must be large, do not set to 0
 hand-swap-triggers: false     # also trigger with the offhand swap key
 lunge-only: false             # only count spears that have the Lunge enchantment
+metrics: true                 # anonymous bStats statistics
 ```
 
 ## Building
@@ -51,8 +52,12 @@ Requires Java 21 and Maven.
 
 ```sh
 mvn clean package
-# output: target/SpearAttributeSwapFixer-2.3.0.jar
+# output: target/SpearAttributeSwapFixer-2.3.1.jar
 ```
+
+## Metrics
+
+This plugin uses [bStats](https://bstats.org) to collect anonymous usage statistics (server software and version, player count, plugin version). Disable it with `metrics: false` in this plugin's `config.yml`, or globally in `plugins/bStats/config.yml`.
 
 ## Credits
 
